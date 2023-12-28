@@ -19,21 +19,12 @@ if not vim.loop.fs_stat(lazypath) then
   }
 end
 vim.opt.rtp:prepend(lazypath)
-
 require('lazy').setup('plugins')
 
 -- [[ Setting options ]]
--- See `:help vim.o`
--- NOTE: You can change these options as you wish!
-
--- Set highlight on search
-vim.o.hlsearch = false
-
--- Make line numbers default
-vim.wo.number = true
-
--- Enable mouse mode
-vim.o.mouse = 'a'
+vim.o.hlsearch = false -- Set highlight on search
+vim.wo.number = true -- Make line numbers default
+vim.o.mouse = 'a' -- Enable mouse mode
 
 -- Sync clipboard between OS and Neovim.
 --  Remove this option if you want your OS clipboard to remain independent.
@@ -391,8 +382,5 @@ cmp.setup {
     { name = 'luasnip' },
   },
 }
-
--- The line beneath this is called `modeline`. See `:help modeline`
--- vim: ts=2 sts=2 sw=2 et
 
 vim.keymap.set('n', '<C-n>', ':NvimTreeToggle<CR>', { desc = 'Open floating diagnostic message' })
