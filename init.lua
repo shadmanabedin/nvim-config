@@ -383,4 +383,7 @@ cmp.setup {
   },
 }
 
-vim.keymap.set('n', '<C-n>', ':NvimTreeToggle<CR>', { desc = 'Open floating diagnostic message' })
+vim.keymap.set('n', '<c-h>', '<C-W>h')
+vim.keymap.set('n', '<c-j>', '<C-W>j')
+vim.keymap.set('n', '<c-k>', '<C-W>k')
+vim.keymap.set('n', '<c-l>', '<C-W>l')
