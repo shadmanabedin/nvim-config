@@ -10,7 +10,7 @@ return {
 				null_ls.builtins.diagnostics.eslint_d,
 				null_ls.builtins.formatting.black,
 			},
-			on_attach = function (client, bufnr)
+			on_attach = function(client, bufnr)
 				if client.supports_method("textDocument/formatting") then
 					vim.api.nvim_clear_autocmds({
 						group = augroup,
@@ -19,12 +19,12 @@ return {
 					vim.api.nvim_create_autocmd("BufWritePre", {
 						group = augroup,
 						buffer = bufnr,
-						callback = function ()
-							vim.lsp.buf.format({bufnr = bufnr})
-						end
+						callback = function()
+							vim.lsp.buf.format({ bufnr = bufnr })
+						end,
 					})
 				end
-			end
+			end,
 		})
 
 		vim.keymap.set("n", "<leader>fm", vim.lsp.buf.format, {})
