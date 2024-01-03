@@ -18,6 +18,14 @@ return {
 				end,
 			},
 		},
+		config = function()
+			local telescope = require('telescope')
+			telescope.setup({
+				defaults = {
+					{ file_ignore_patterns = { "node_modules" } }
+				}
+			})
+		end
 	},
 	{
 		"nvim-telescope/telescope-ui-select.nvim",
