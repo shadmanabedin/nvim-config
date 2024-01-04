@@ -20,3 +20,6 @@ vim.keymap.set("n", "<c-j>", "<C-W>j")
 vim.keymap.set("n", "<c-k>", "<C-W>k")
 vim.keymap.set("n", "<c-l>", "<C-W>l")
 vim.keymap.set("i", "jj", "<Esc>")
+
+vim.keymap.set("n", "sv", ":vsplit<CR>")
+vim.keymap.set("n", "ss", ":split<CR>")
