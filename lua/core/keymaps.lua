@@ -23,3 +23,10 @@ vim.keymap.set("i", "jj", "<Esc>")
 
 vim.keymap.set("n", "sv", ":vsplit<CR>")
 vim.keymap.set("n", "ss", ":split<CR>")
+vim.keymap.set("n", "te", ":tabedit<CR>")
+vim.keymap.set("n", "t]", ":tabnext<CR>")
+vim.keymap.set("n", "t[", ":tabprev<CR>")
+vim.keymap.set("n", "gr", ":lua vim.lsp.buf.references()<CR>")
+
+vim.keymap.set("n", "<leader>o", "o<Esc>")
+vim.keymap.set("n", "<leader>O", "O<Esc>")
