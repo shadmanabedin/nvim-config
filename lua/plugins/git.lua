@@ -1,7 +1,6 @@
 return {
 	"tpope/vim-fugitive",
 	"tpope/vim-rhubarb",
-
 	{
 		-- Adds git related signs to the gutter, as well as utilities for managing changes
 		"lewis6991/gitsigns.nvim",
@@ -44,5 +43,13 @@ return {
 				end, { expr = true, buffer = bufnr, desc = "Jump to previous hunk" })
 			end,
 		},
+	},
+	{
+		"f-person/git-blame.nvim",
+		config = function()
+			require("gitblame").setup({
+				enabled = false,
+			})
+		end,
 	},
 }

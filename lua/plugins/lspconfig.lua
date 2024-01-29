@@ -3,7 +3,7 @@ return {
 		"williamboman/mason.nvim",
 		config = function()
 			require("mason").setup({
-				ensure_installed = { "black", "stylua", "eslint_d" },
+				ensure_installed = { "black", "stylua", "eslint_d", "prettier" },
 			})
 		end,
 	},
