@@ -16,8 +16,19 @@ return {
 	config = function()
 		local cmp = require("cmp")
 		local luasnip = require("luasnip")
+		local types = require "luasnip.util.types"
 		require("luasnip.loaders.from_vscode").lazy_load()
-		luasnip.config.setup({})
+		luasnip.config.setup({
+			history = true,
+			updateevents = "TextChanged,TextChangedI",
+			ext_opts = {
+				[types.choiceNode] = {
+					active = {
+						virt_text = { { "<--", "Error" } },
+					},
+				},
+			},
+		})
 		local lspkind = require("lspkind")
 		cmp.setup({
 			snippet = {
@@ -62,7 +73,7 @@ return {
 				{ name = "nvim_lsp" },
 				{ name = "luasnip" },
 				{ name = "path" },
-				{ name = "buffer",  keyword_length = 5 },
+				{ name = "buffer", keyword_length = 5 },
 			},
 			formatting = {
 				format = lspkind.cmp_format({
@@ -73,6 +84,9 @@ return {
 					ellipsis_char = "...", -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
 				}),
 			},
+			experimental = {
+				ghost_text = true,
+			}
 		})
 	end,
 }
