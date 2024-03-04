@@ -30,5 +30,23 @@ return {
 	},
 
 	-- "gc" to comment visual regions/lines
-	{ "numToStr/Comment.nvim", opts = {} },
+	{
+		"numToStr/Comment.nvim",
+		opts = {},
+		config = function()
+			require("Comment").setup({
+				opleader = {
+					line = "gc",
+					block = "gb"
+				},
+				mapping = {
+					basic = true
+				},
+				toggler = {
+					line = "gcc",
+					block = "gbc"
+				}
+			})
+		end,
+	},
 }
