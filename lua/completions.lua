@@ -1,6 +1,6 @@
-require("luasnip.session.snippet_collection").clear_snippets "all"
-require("luasnip.session.snippet_collection").clear_snippets "rust"
-require("luasnip.session.snippet_collection").clear_snippets "typescriptreact"
+require("luasnip.session.snippet_collection").clear_snippets("all")
+require("luasnip.session.snippet_collection").clear_snippets("rust")
+require("luasnip.session.snippet_collection").clear_snippets("typescriptreact")
 
 local lspkind = require("lspkind")
 lspkind.init()
@@ -84,7 +84,7 @@ end)
 
 vim.keymap.set("n", "<leader>so", "<cmd>source ~/.config/nvim/lua/completions.lua<CR>")
 
-local s, i, t, c, f = ls.s, ls.insert_node, ls.text_node, ls.choice_node, ls.function_node
+local s, i, t, c, f, sn = ls.s, ls.insert_node, ls.text_node, ls.choice_node, ls.function_node, ls.snippet_node
 local fmt = require("luasnip.extras.fmt").fmt
 local rep = require("luasnip.extras").rep
 local l = require("luasnip.extras").lambda
@@ -121,5 +121,21 @@ ls.add_snippets("typescriptreact", {
 			{ i(1), i(2), setter = l(l._1:sub(1, 1):upper() .. l._1:sub(2, -1), 1) }
 		)
 	),
-})
+	s(
+		"fc",
+		fmt(
+			[[const {}: FC{} = ({}) => {{
+	{}
 
+	return {};
+}}]],
+			{
+				i(1),
+				c(2, { sn(nil, fmt([[<{}>]], i(1))), t("") }),
+				i(3), -- TODO: make this a function node using treesitter to autofill with the props?
+				i(0),
+				c(4, { sn(nil, fmt([[<div>{}</div>]], i(1))), sn(nil, fmt([[<>{}</>]], i(1))), i("") }),
+			}
+		)
+	),
+})
