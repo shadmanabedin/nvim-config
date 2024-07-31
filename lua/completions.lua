@@ -24,7 +24,7 @@ cmp.setup({
 		{ name = "nvim_lsp" },
 		{ name = "luasnip" },
 		{ name = "path" },
-		{ name = "buffer", keyword_length = 5 },
+		{ name = "buffer",  keyword_length = 5 },
 	},
 	snippet = {
 		expand = function(args)
@@ -84,8 +84,10 @@ end)
 
 vim.keymap.set("n", "<leader>so", "<cmd>source ~/.config/nvim/lua/completions.lua<CR>")
 
-local s, i, t, c, f, sn = ls.s, ls.insert_node, ls.text_node, ls.choice_node, ls.function_node, ls.snippet_node
+local s, i, t, c, f, sn, d =
+	ls.s, ls.insert_node, ls.text_node, ls.choice_node, ls.function_node, ls.snippet_node, ls.dynamic_node
 local fmt = require("luasnip.extras.fmt").fmt
+local fmta = require("luasnip.extras.fmt").fmta
 local rep = require("luasnip.extras").rep
 local l = require("luasnip.extras").lambda
 
@@ -113,6 +115,30 @@ ls.add_snippets("rust", {
 	),
 })
 
+local type_fields = function(info)
+	local node = vim.treesitter.get_node()
+
+	while node ~= nil do
+		if node:type() == "variable_declarator" then
+			break
+		end
+	end
+
+	if not node then
+		vim.notify("Couldn't find the function we're in")
+	end
+
+	vim.lsp.buf.type_definition()
+
+	local query = assert(vim.treesitter.query.get("go", "return-snipper"), "No query")
+	for _, capture in query:iter_captures(node, 0) do
+		if handlers[capture:type()] then
+			return handlers[capture:type()](capture, info)
+		end
+	end
+	return i()
+end
+
 ls.add_snippets("typescriptreact", {
 	s(
 		"us",
@@ -124,11 +150,13 @@ ls.add_snippets("typescriptreact", {
 	s(
 		"fc",
 		fmt(
-			[[const {}: FC{} = ({}) => {{
-	{}
-
-	return {};
-}}]],
+			[[
+			    const {}: FC{} = ({}) => {{
+					{}
+				
+					return {};
+				}}
+			]],
 			{
 				i(1),
 				c(2, { sn(nil, fmt([[<{}>]], i(1))), t("") }),
