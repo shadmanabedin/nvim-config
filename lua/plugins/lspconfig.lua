@@ -3,7 +3,7 @@ return {
 		"williamboman/mason.nvim",
 		config = function()
 			require("mason").setup({
-				ensure_installed = { "black", "stylua", "eslint_d", "prettier", "templ" },
+				ensure_installed = { "black", "stylua", "eslint_d", "prettier", "templ", "elixirls" },
 			})
 		end,
 	},
@@ -11,7 +11,16 @@ return {
 		"williamboman/mason-lspconfig.nvim",
 		config = function()
 			require("mason-lspconfig").setup({
-				ensure_installed = { "lua_ls", "tsserver", "pyright", "tailwindcss", "gopls", "rust_analyzer", "templ" },
+				ensure_installed = {
+					"lua_ls",
+					"tsserver",
+					"pyright",
+					"tailwindcss",
+					"gopls",
+					"rust_analyzer",
+					"templ",
+					"elixirls",
+				},
 			})
 		end,
 	},
@@ -26,6 +35,9 @@ return {
 			lspconfig.gopls.setup({})
 			lspconfig.rust_analyzer.setup({})
 			lspconfig.templ.setup({})
+			lspconfig.elixirls.setup({
+				cmd = { "elixir-ls" },
+			})
 
 			vim.filetype.add({ extension = { templ = "templ" } })
 

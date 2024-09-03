@@ -9,7 +9,7 @@ return {
 	config = function()
 		local config = require("nvim-treesitter.configs")
 		config.setup({
-			ensure_installed = { "lua", "typescript", "tsx", "javascript", "python" },
+			ensure_installed = { "lua", "typescript", "tsx", "javascript", "python", "elixir"},
 			highlight = { enable = true },
 			indent = { enable = true },
 			incremental_selection = {
@@ -41,6 +41,7 @@ return {
 					"glimmer",
 					"handlebars",
 					"hbs",
+					"elixir",
 				},
 				skip_tags = {
 					"area",
