@@ -89,10 +89,12 @@ local fmt = require("luasnip.extras.fmt").fmt
 local rep = require("luasnip.extras").rep
 local l = require("luasnip.extras").lambda
 
+-- Lua snippets
 ls.add_snippets("lua", {
 	s("req", fmt("local {} = require('{}')", { i(1, "default"), rep(1) })),
 })
 
+-- Rust snippets
 ls.add_snippets("rust", {
 	s(
 		"modtest",
@@ -113,6 +115,7 @@ ls.add_snippets("rust", {
 	),
 })
 
+-- React snippets
 ls.add_snippets("typescriptreact", {
 	s(
 		"us",
@@ -121,5 +124,43 @@ ls.add_snippets("typescriptreact", {
 			{ i(1), i(2), setter = l(l._1:sub(1, 1):upper() .. l._1:sub(2, -1), 1) }
 		)
 	),
+	s(
+		"ue",
+		fmt([[
+useEffect(() => {{
+	{}
+}}, [{}])
+]], { i(1), i(2) })
+	)
 })
 
+ls.add_snippets("html", {
+	s(
+		"html",
+		fmt(
+			[[<!DOCTYPE html>
+<html lang=\"en\">
+
+<head>
+    <meta charset=\"utf-8\">
+    <meta content=\"width=device-width, initial-scale=1.0\" name=\"viewport\">
+    <meta content=\"IE=edge\" http-equiv=\"X-UA-Compatible\">
+
+    <title> {} </title>
+	{}
+	{}
+</head>
+
+<body>
+{}
+</body>
+
+</html>]], {
+				i(1),
+				c(3, { t [[<link href=\"styles.css\" rel=\"stylesheet\">]] , t "" }),
+				c(4, { t [[<script defer src=\"main.js\"></script>]] , t "" }),
+				i(2),
+			}
+		)
+	)
+})
