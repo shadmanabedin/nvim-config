@@ -164,3 +164,7 @@ ls.add_snippets("html", {
 		)
 	)
 })
+
+ls.add_snippets("markdown", {
+	s(":check:", t "✓")
+})
