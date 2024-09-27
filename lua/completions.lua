@@ -1,6 +1,6 @@
-require("luasnip.session.snippet_collection").clear_snippets "all"
-require("luasnip.session.snippet_collection").clear_snippets "rust"
-require("luasnip.session.snippet_collection").clear_snippets "typescriptreact"
+require("luasnip.session.snippet_collection").clear_snippets("all")
+require("luasnip.session.snippet_collection").clear_snippets("rust")
+require("luasnip.session.snippet_collection").clear_snippets("typescriptreact")
 
 local lspkind = require("lspkind")
 lspkind.init()
@@ -126,12 +126,22 @@ ls.add_snippets("typescriptreact", {
 	),
 	s(
 		"ue",
-		fmt([[
+		fmt(
+			[[
 useEffect(() => {{
 	{}
 }}, [{}])
-]], { i(1), i(2) })
-	)
+]],
+			{ i(1), i(2) }
+		)
+	),
+	s(
+		"clg",
+		fmt(
+			[[console.log({});{}]],
+			{ i(1), i(0) }
+		)
+	),
 })
 
 ls.add_snippets("html", {
@@ -155,16 +165,17 @@ ls.add_snippets("html", {
 {}
 </body>
 
-</html>]], {
+</html>]],
+			{
 				i(1),
-				c(3, { t [[<link href=\"styles.css\" rel=\"stylesheet\">]] , t "" }),
-				c(4, { t [[<script defer src=\"main.js\"></script>]] , t "" }),
+				c(3, { t([[<link href=\"styles.css\" rel=\"stylesheet\">]]), t("") }),
+				c(4, { t([[<script defer src=\"main.js\"></script>]]), t("") }),
 				i(2),
 			}
 		)
-	)
+	),
 })
 
 ls.add_snippets("markdown", {
-	s(":check:", t "✓")
+	s(":check:", t("✓")),
 })
